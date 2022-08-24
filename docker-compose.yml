@@ -1,0 +1,28 @@
+version: "3.4"
+
+services:
+  node_server:
+    container_name: node_server
+    image: backend
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+      PORT: 2022
+      JWT_SECRET_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+      MONGODB_URL: mongodb://mongo:27017/employee?
+      LOCAL_MONGODB_URL: mongodb://mongodb:27017/employee?
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app
+  mongo_db:
+    container_name: mongodb
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - data:/data/db
+volumes:
+  data:
