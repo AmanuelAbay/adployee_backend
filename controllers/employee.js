@@ -1,7 +1,6 @@
 import Employee from "../models/Employee.js";
 
 export const createEmployee = async (req, res, next) => {
-  console.log("employee created!");
   const employee = new Employee(req.body);
   try {
     await employee.save();

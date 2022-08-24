@@ -10,6 +10,7 @@ const EmployeeSchema = mongoose.Schema({
   },
   email: {
     type: String,
+    unique: true
   },
   date_of_birth: {
     type: String,
