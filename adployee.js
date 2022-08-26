@@ -13,12 +13,7 @@ dotenv.config();
 const url = process.env.mongodb_url || "mongodb://0.0.0.0:27017/employee?";
 const connect = async () => {
   try {
-    await mongoose.connect(
-      process.env.MONGODB_URL || process.env.LOCAL_MONGODB_URL,
-      {
-        useNewUrlParser: true,
-      }
-    );
+    await mongoose.connect(process.env.MONGODB_URL);
     console.log("mongoDB connected.");
   } catch (error) {
     throw error;

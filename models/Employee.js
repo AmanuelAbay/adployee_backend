@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const EmployeeSchema = mongoose.Schema({
   profile_img: {
-    type: String,
+    type: String
   },
   full_name: {
     type: String,
