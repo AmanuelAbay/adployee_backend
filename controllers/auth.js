@@ -9,13 +9,13 @@ export const register = async (req, res, next) => {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
 
-    const newUser = new User({
+    const Admin = new User({
       ...req.body,
       password: hash,
     });
 
-    await newUser.save();
-    res.status(200).send("User has been created.");
+    await Admin.save();
+    res.status(200).send("Admin has been created.");
   } catch (err) {
     next(err);
   }
@@ -24,6 +24,7 @@ export const register = async (req, res, next) => {
 export const login = async (req, res, next) => {
   try {
     const user = await User.findOne({ username: req.body.username });
+    // console.log(user);
     if (!user) return next(createError(404, "User not found!"));
 
     const isPasswordCorrect = await bcrypt.compare(
@@ -31,21 +32,22 @@ export const login = async (req, res, next) => {
       user.password
     );
 
-    if (!isPasswordCorrect)
+    if (!isPasswordCorrect) {
       return next(createError(400, "Wrong password or username!"));
+    }
 
     const token = jwt.sign(
-      { id: user._id, isAdmin: user.isAdmin },
+      { id: user._id, full_name: user.full_name },
       process.env.JWT_SECRET_KEY
     );
-
-    const { password, isAdmin, ...otherDetails } = user._doc;
+    const { password, ...currentUser } = user._doc;
+    console.log(user._id);
     res
       .cookie("access_token", token, {
         httpOnly: true,
       })
       .status(200)
-      .json({ details: { ...otherDetails }, isAdmin });
+      .json({ currentUser });
   } catch (err) {
     next(err);
   }

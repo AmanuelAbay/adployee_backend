@@ -4,7 +4,6 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRoute from "./routes/auth.js";
 import employeeRoute from "./routes/employee.js";
-import adminRoute from "./routes/admin.js";
 import mongoose from "mongoose";
 
 const adployee = express();
@@ -31,19 +30,18 @@ adployee.use(cookieParser());
 adployee.use(cors());
 adployee.use(express.json());
 adployee.use("/api/auth", authRoute);
-adployee.use("/api/admin", adminRoute);
 adployee.use("/api/employee", employeeRoute);
 
-adployee.use((err, res) => {
+adployee.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
   const errorMessage = err.message || "Something went wrong!";
   return res.status(errorStatus).json({
     success: false,
     status: errorStatus,
     message: errorMessage,
-    stack: err.stack,
   });
 });
+
 
 adployee.listen(process.env.PORT, () => {
   connect();

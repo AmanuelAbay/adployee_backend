@@ -12,7 +12,7 @@ const AdminSchema = mongoose.Schema({
     type: String,
     required: "fill your password!!",
   },
-  position: {
+  username: {
     type: String,
     default: "admin",
   },
