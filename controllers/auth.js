@@ -37,17 +37,14 @@ export const login = async (req, res, next) => {
     }
 
     const token = jwt.sign(
-      { id: user._id, full_name: user.full_name },
+      { id: user._id, name: user.name },
       process.env.JWT_SECRET_KEY
     );
+    console.log(user.name);
+
     const { password, ...currentUser } = user._doc;
-    console.log(user._id);
-    res
-      .cookie("access_token", token, {
-        httpOnly: true,
-      })
-      .status(200)
-      .json({ currentUser });
+
+    res.status(200).json({ currentUser, token: token });
   } catch (err) {
     next(err);
   }
