@@ -1,5 +1,4 @@
 import Employee from "../models/Employee.js";
-import DeletedEmployee from "../models/DeletedEmployee.js";
 
 export const createEmployee = async (req, res, next) => {
   const employee = new Employee(req.body);
