@@ -9,7 +9,7 @@ import mongoose from "mongoose";
 const adployee = express();
 dotenv.config();
 
-const url = process.env.mongodb_url || "mongodb://0.0.0.0:27017/employee?";
+
 const connect = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URL);

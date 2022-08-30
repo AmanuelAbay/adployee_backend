@@ -12,8 +12,7 @@ services:
       NODE_ENV: production
       PORT: 2022
       JWT_SECRET_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-      MONGODB_URL: mongodb+srv://employee:employee@cluster0.o44vgqm.mongodb.net/employee?retryWrites=true&w=majority
-      LOCAL_MONGODB_URL: mongodb://mongodb:27017/employee?
+      MONGODB_URL: mongodb://mongodb:27017/employee?
     ports:
       - 2022:2022
     volumes:
